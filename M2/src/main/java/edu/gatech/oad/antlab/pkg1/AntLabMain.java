@@ -52,7 +52,7 @@ import edu.gatech.oad.antlab.pkg2.*;
      */
     public void printOutMessage() {
 
-        String toPrint = 
+        String toPrint =
             ant11.getMessage() + ant12.getMessage() + ant21.getMessage()
           + ant22.getMessage() + ant31.getMessage();
 		  //Person1 replace P1 with your name
@@ -65,8 +65,8 @@ import edu.gatech.oad.antlab.pkg2.*;
 		  toPrint += p2.toString("ashah420");
 		  //Person3 replace P3 with your name
 		  //and gburdell3 with your gt id
-		  Person3 p3 = new Person3("P3");
-		  toPrint += p3.toString("gburdell3");
+		  Person3 p3 = new Person3("mohammad");
+		  toPrint += p3.toString("mkhan311");
                   //Person4 replace P4 with your name
                   //and gburdell4 with your gt id
                   Person4 p4 = new Person4("P4");
