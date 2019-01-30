@@ -1,4 +1,5 @@
 # CS2340-SpaceTrader
 
-Sal didnt have enough money for a spaceship and got stranded on a planet, making him tonight's big loser
-![](https://www.instagram.com/p/BryJWvfl2vj/?utm_source=ig_web_button_share_sheet)
+Sal didnt go for the head and let half of all life get wiped out, making him tonight's big loser
+
+![](https://i.redd.it/qtz3zs7i8v821.jpg)
