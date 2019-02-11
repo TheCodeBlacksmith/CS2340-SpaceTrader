@@ -1,5 +1,5 @@
 # CS2340-SpaceTrader
-Dawood
+Dawood Mohammed (Leader)
 Abdullah
 Saim
 Humza
