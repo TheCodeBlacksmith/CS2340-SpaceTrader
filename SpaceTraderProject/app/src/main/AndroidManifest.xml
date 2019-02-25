@@ -19,7 +19,7 @@
         <activity android:name=".Views.Registration"></activity>
         <activity android:name=".Views.SelectDifficulty" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Views.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".Views.MainActivity">
             <intent-filter>
@@ -28,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Views.NameSkllPoints" />
     </application>
 
 </manifest>
