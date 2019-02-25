@@ -21,7 +21,7 @@ public class SelectDifficulty extends AppCompatActivity {
         // Once everything is finished
 
 
-        Intent intent = new Intent(this, Registration.class);
+        Intent intent = new Intent(this, NameSkllPoints.class);
         startActivity(intent);
         finish();
     }
