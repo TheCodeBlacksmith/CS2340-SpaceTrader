@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), NameSkllPoints.class);
+                            Intent intent = new Intent(getApplicationContext(), NameSkillPoints.class);
                             startActivity(intent);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), NameSkllPoints.class);
+                            Intent intent = new Intent(getApplicationContext(), NameSkillPoints.class);
                             startActivity(intent);
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

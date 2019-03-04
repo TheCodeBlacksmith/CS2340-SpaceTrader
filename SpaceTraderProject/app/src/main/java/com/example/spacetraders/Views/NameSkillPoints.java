@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class NameSkllPoints extends AppCompatActivity {
+public class NameSkillPoints extends AppCompatActivity {
 
     private FirebaseUser mCurrentUser;
     private String current_uID;
@@ -94,7 +94,7 @@ public class NameSkllPoints extends AppCompatActivity {
             public void onClick(View v) {
                 if (!name.getText().toString().equals("")) {
                     if (p1.getSkillPoints() != 16) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(NameSkllPoints.this).create();
+                        AlertDialog alertDialog = new AlertDialog.Builder(NameSkillPoints.this).create();
                         alertDialog.setTitle("Skill Point Allocation");
                         alertDialog.setMessage("You need to allocate " + (16 - p1.getSkillPoints()) + " more points");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -120,7 +120,7 @@ public class NameSkllPoints extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(), "Data Upated!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(NameSkllPoints.this, Registration.class);
+                        Intent intent = new Intent(NameSkillPoints.this, Registration.class);
                         startActivity(intent);
                     }
                 })
