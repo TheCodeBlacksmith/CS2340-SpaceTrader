@@ -1,43 +1,27 @@
 package com.example.spacetraders.Views;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.spacetraders.Entity.Player;
 import com.example.spacetraders.R;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A login screen that offers login via email/password.
@@ -50,6 +34,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private TextView switchLoginStatus;
+    private Button mEmailSignInButton;
+    private Boolean loginStatus = true;  // if true, means user wants to log in | false, user wants to register
+
+    private FirebaseAuth mAuth;
+    private static final String TAG = "EmailPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +47,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
         mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailSignInButton= (Button) findViewById(R.id.email_sign_in_button);
+
+
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
+        switchLoginStatus = (TextView) findViewById(R.id.loginSwitchButton);
+
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -70,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,10 +80,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-    }
+        switchLoginStatus.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loginStatus) {
+                    loginStatus = false;
+                    mEmailSignInButton.setText("Register!");
+                    switchLoginStatus.setText("Log In!");
+                } else {
+                    loginStatus = true;
+                    mEmailSignInButton.setText("Log In!");
+                    switchLoginStatus.setText("Register Here!");
+                }
+            }
+        });
 
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -126,11 +140,52 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            Player p1 = new Player(email, password);
-            Intent intent = new Intent(getApplicationContext(), SelectDifficulty.class);
-            intent.putExtra("password", password);
-            startActivity(intent);
+            if (loginStatus) {
+                loginUser(email, password);
+            } else {
+                registerUser(email, password);
+            }
+
+
         }
+    }
+
+    private void registerUser(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), NameSkllPoints.class);
+                            startActivity(intent);
+                        } else {
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void loginUser(String email, final String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), NameSkllPoints.class);
+                            startActivity(intent);
+                        } else {
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private boolean isEmailValid(String email) {

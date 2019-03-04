@@ -3,23 +3,30 @@ package com.example.spacetraders.Views;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.spacetraders.Entity.Player;
+import com.example.spacetraders.Model.Player;
 import com.example.spacetraders.R;
-
-import java.util.Objects;
-import java.util.jar.Attributes;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class NameSkllPoints extends AppCompatActivity {
 
+    private FirebaseUser mCurrentUser;
+    private String current_uID;
+    private DatabaseReference mDatabase;
 
-    //String password = Objects.requireNonNull(getIntent().getExtras()).getString("password");
 
     EditText name;
     Button submitButton;
@@ -64,12 +71,24 @@ public class NameSkllPoints extends AppCompatActivity {
         traderPoints = findViewById(R.id.textSPTrader);
         engineerPoints = findViewById(R.id.textSPEngineer);
 
-        p1 = new Player(name.getText().toString(), "password");
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (FirebaseAuth.getInstance() ==  null) {
+            Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
+        }
+        current_uID = mCurrentUser.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
+        p1 = new Player(mCurrentUser.getEmail(), name.getText().toString());
 
         updateSPFields();
 
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,19 +105,33 @@ public class NameSkllPoints extends AppCompatActivity {
                                 });
                         alertDialog.show();
                     } else {
-
-                        Intent intent = new Intent(NameSkllPoints.this, Registration.class);
-                        intent.putExtra("name", name.getText().toString());
-                        intent.putExtra("skillpoints", p1.getSkillPointsDistrib());
-                        startActivity(intent);
+                        p1.setUserName(name.getText().toString());
+                        writeUserData(p1);
                     }
                 }
             }
         });
-
-
-
     }
+
+
+    private void writeUserData(Player player) {
+        mDatabase.child("users").child(current_uID).setValue(player)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), "Data Upated!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(NameSkllPoints.this, Registration.class);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Could not update data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     public void changeSP(View view) {
         if (view.getId() == R.id.buttonPlusPilot) {
             p1.changePoints(0, 1);

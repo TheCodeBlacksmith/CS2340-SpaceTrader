@@ -13,4 +13,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="description">Description</string>
+    <string name="solar_system_name">Solar System Name</string>
+    <string name="Location" />
+    <string name="location">Location:</string>
 </resources>

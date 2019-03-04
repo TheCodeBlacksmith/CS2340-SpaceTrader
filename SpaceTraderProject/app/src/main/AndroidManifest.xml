@@ -9,7 +9,6 @@
 
     <dist:module dist:instant="true" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,14 +16,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.Registration"></activity>
-        <activity android:name=".Views.SelectDifficulty" />
+        <activity android:name=".ViewModel.UniverseSelectionActivity"></activity>
+        <activity android:name=".Views.ProfileActivity" />
+        <activity android:name=".Views.Registration" />
         <activity
             android:name=".Views.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".Views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
