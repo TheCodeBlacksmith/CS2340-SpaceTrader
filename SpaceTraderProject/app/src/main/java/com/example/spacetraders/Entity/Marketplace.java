@@ -15,7 +15,7 @@ public class Marketplace {
     };
 
     //Constructor checks the current planet's tech lvl and removes items from
-    // the list which would be impossible to but on the the planet. Also calculates
+    // the list which would be impossible to buy on the the planet. Also calculates
     //final price for each item
     public Marketplace() {
         for (int i = 0; i < itemsForSale.length; i++) {
