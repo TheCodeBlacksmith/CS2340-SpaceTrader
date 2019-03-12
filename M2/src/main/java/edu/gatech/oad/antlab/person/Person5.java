@@ -31,7 +31,11 @@ public class Person5 {
 	 */
 	private String calc(String input) {
 	  //Person 5 put your implementation here
-	  return null;
+		String dawood = "";
+		dawood = input.substring(0, 2);
+		String dawood2 = input.substring(2, input.length());
+		dawood2 = dawood2.concat(dawood);
+		return dawood2;
 	}
 	
 	/**
@@ -45,5 +49,4 @@ public class Person5 {
 	public String toString(String input) {
 	  return name + calc(input);
 	}
-
 }
