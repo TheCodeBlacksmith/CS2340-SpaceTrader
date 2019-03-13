@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/planet_space_universe_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.Registration">
@@ -14,6 +15,8 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="177dp"
         android:text="Select Difficulty"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_bright"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +24,10 @@
 
     <Button
         android:id="@+id/buttonBeginner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="72dp"
         android:onClick="onDifficultyButtonClicked"
         android:text="Beginner"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,50 +37,54 @@
 
     <Button
         android:id="@+id/buttonEasy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="130dp"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:onClick="onDifficultyButtonClicked"
         android:text="Easy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBeginner" />
+        tools:layout_editor_absoluteY="204dp" />
 
     <Button
         android:id="@+id/buttonNormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/holo_blue_bright"
         android:onClick="onDifficultyButtonClicked"
         android:text="Normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEasy" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonEasy"
+        tools:layout_editor_absoluteX="141dp" />
 
     <Button
         android:id="@+id/buttonHard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_marginEnd="8dp"
         android:onClick="onDifficultyButtonClicked"
         android:text="Hard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonNormal" />
+        tools:layout_editor_absoluteY="350dp" />
 
     <Button
         android:id="@+id/buttonImpossible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="264dp"
         android:onClick="onDifficultyButtonClicked"
         android:text="Impossible"
+        android:background="@android:color/holo_blue_bright"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHard" />
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimary"
     tools:context=".Views.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +28,26 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@android:color/black">
+
+                <TextView
+                    android:id="@+id/textViewPilot2"
+                    android:layout_width="match_parent"
+
+
+                    android:layout_height="39dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Skill Points"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <EditText
                     android:id="@+id/nameEditText"
@@ -34,8 +56,8 @@
                     android:layout_marginTop="32dp"
                     android:editable="true"
                     android:hint="Enter Name"
-                    android:singleLine="true"
                     android:textAlignment="center"
+                    android:textColorHint="#ff00ddff"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -47,24 +69,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:background="@android:color/holo_blue_bright"
                     android:text="Submit"
+                    android:textColor="@android:color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="5dp"
             android:layout_weight="2"
+            android:background="@android:color/black"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -72,164 +98,214 @@
                     android:id="@+id/textViewPilot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:padding="5dp"
                     android:text="Pilot"
                     android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/buttonPlusPilot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="changeSP"
-                    android:text="+" />
 
                 <TextView
                     android:id="@+id/textSPPilot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Skill Points:"
+                    android:padding="5dp"
+                    android:text="_"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/buttonMinusPilot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:id="@+id/buttonPlusPilot"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginRight="90dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
-                    android:text="-" />
+                    android:text="+"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonMinusPilot"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="100dip"
+                    android:layout_marginTop="-120dip"
+                    android:layout_marginRight="100dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
+                    android:onClick="changeSP"
+                    android:text="-"
+                    android:textColor="#000000" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewFighter"
+                    android:id="@+id/textViewFighter3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:padding="5dp"
                     android:text="Fighter"
                     android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/buttonPlusFighter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="changeSP"
-                    android:text="+" />
 
                 <TextView
                     android:id="@+id/textSPFighter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Skill Points:"
+                    android:padding="5dp"
+                    android:text="_"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/buttonMinusFighter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:id="@+id/buttonPlusFighter"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginRight="0dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
-                    android:text="-" />
+                    android:text="+"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonMinusFighter"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="100dip"
+                    android:layout_marginTop="-120dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
+                    android:onClick="changeSP"
+                    android:text="-"
+                    android:textColor="#000000" />
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="4dp"
             android:layout_weight="3"
+            android:background="@android:color/black"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="171dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:padding="5dp"
                     android:text="Trader"
                     android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/buttonPlusTrader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="changeSP"
-                    android:text="+" />
 
                 <TextView
                     android:id="@+id/textSPTrader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Skill Points:"
+                    android:padding="5dp"
+                    android:text="_"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/buttonMinusTrader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:id="@+id/buttonPlusTrader"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginRight="90dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
-                    android:text="-" />
+                    android:text="+"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonMinusTrader"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="100dip"
+                    android:layout_marginTop="-120dip"
+                    android:layout_marginRight="100dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
+                    android:onClick="changeSP"
+                    android:text="-"
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="162dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:padding="5dp"
                     android:text="Engineer"
                     android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/buttonPlusEngineer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="changeSP"
-                    android:text="+" />
 
                 <TextView
                     android:id="@+id/textSPEngineer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Skill Points:"
+                    android:padding="5dp"
+                    android:text="_"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/buttonMinusEngineer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:id="@+id/buttonPlusEngineer"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginRight="0dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
-                    android:text="-" />
+                    android:text="+"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonMinusEngineer"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="100dip"
+                    android:layout_marginTop="-120dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginBottom="50dip"
+                    android:background="@android:color/holo_blue_bright"
+                    android:onClick="changeSP"
+                    android:text="-"
+                    android:textColor="#000000" />
             </LinearLayout>
         </LinearLayout>
 

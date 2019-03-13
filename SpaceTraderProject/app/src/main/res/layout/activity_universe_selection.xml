@@ -10,7 +10,7 @@
         android:id="@+id/universe_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/universe_item">
-    </android.support.v7.widget.RecyclerView>
+        android:background="@android:color/background_dark"
+        tools:listitem="@layout/universe_item"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
