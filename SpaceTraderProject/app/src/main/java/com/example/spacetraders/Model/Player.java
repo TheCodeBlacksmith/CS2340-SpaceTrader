@@ -13,6 +13,7 @@ public class Player {
     //private int[] skillPointsDistrib = new int[] {4, 4, 4, 4};
     private Map<String, Integer> skillPointsMap;
     private int skillPoints = 16;
+    private String currentPlanet = "";
 
     public Player() {
 
@@ -99,4 +100,7 @@ public class Player {
         return map;
     }
 
+    public String getCurrentPlanet() {
+        return currentPlanet;
+    }
 }

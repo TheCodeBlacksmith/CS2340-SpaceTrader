@@ -1,6 +1,21 @@
 package com.example.spacetraders.Entity;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.example.spacetraders.Model.Player;
+import com.example.spacetraders.Model.Universe;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class Planet {
+
     public static String[] SolarNames = {
             "Acamar",
             "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"
@@ -123,4 +138,57 @@ public class Planet {
             "Zalkon",
             "Zuul"			// From the first Ghostbusters movie
     };
+
+    public static int getTechLevel() {
+
+        FirebaseUser mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (FirebaseAuth.getInstance() ==  null) {
+            System.out.println("NULL");
+        }
+        String current_uID = mCurrentUser.getUid();
+        DatabaseReference mUserDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(current_uID);
+        final String[] planet = {""};
+        mUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Player player = dataSnapshot.getValue(Player.class);
+                planet[0] = player.getCurrentPlanet();
+                Log.i("Current Planet:", "" + player.getCurrentPlanet());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        DatabaseReference mUniverseDatabase = FirebaseDatabase.getInstance().getReference().child("universe").child(planet[0]);
+
+        final int[] returnTechLevel = new int[1];
+        mUniverseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Universe universe = dataSnapshot.getValue(Universe.class);
+                String techLevelType = universe.getResource();
+                Log.i("techLevelType", universe.toString());
+                TechLevel[] techLevels = TechLevel.values();
+//                for (int i = 0; i < techLevels.length; i++){
+//                    if (techLevels[i].name().equals(techLevelType)){
+//                        returnTechLevel[0] = i;
+//                        //Log.i("Current User:", "" +returnTechLevel[0]);
+//                    }
+//                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return 8;
+    }
 }

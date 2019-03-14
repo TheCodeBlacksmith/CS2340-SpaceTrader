@@ -66,6 +66,17 @@ public class Universe {
         return xCoordinate;
     }
 
+    @Override
+    public String toString() {
+        return "Universe{" +
+                "planet='" + planet + '\'' +
+                ", resource='" + resource + '\'' +
+                ", techLevel='" + techLevel + '\'' +
+                ", xCoordinate=" + xCoordinate +
+                ", yCoordinate=" + yCoordinate +
+                '}';
+    }
+
     public void setxCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
     }

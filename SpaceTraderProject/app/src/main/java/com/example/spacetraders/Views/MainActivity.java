@@ -3,11 +3,14 @@ package com.example.spacetraders.Views;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.spacetraders.Entity.Marketplace;
 import com.example.spacetraders.R;
+import com.example.spacetraders.ViewModel.MarketActivity;
 import com.example.spacetraders.ViewModel.UniverseSelectionActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button signOutButton;
     Button exitAppButton;
     Button buttonUniverse;
+    Button buttonMarket;
     private FirebaseAuth mAuth;
 
     @Override
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         buttonUniverse = findViewById(R.id.buttonUniverses);
         signOutButton = findViewById(R.id.buttonSignOut);
         exitAppButton = findViewById(R.id.buttonExitApp);
+        buttonMarket = findViewById(R.id.buttonMarket);
 
         mAuth = FirebaseAuth.getInstance();  // Initialize Firebase Auth
 
@@ -75,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), UniverseSelectionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonMarket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MarketActivity.class);
                 startActivity(intent);
             }
         });
