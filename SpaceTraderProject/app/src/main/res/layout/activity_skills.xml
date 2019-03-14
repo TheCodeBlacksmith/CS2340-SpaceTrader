@@ -57,6 +57,7 @@
                     android:editable="true"
                     android:hint="Enter Name"
                     android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
                     android:textColorHint="#ff00ddff"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -93,6 +93,7 @@ public class NameSkillPoints extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!name.getText().toString().equals("")) {
+                    //Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_LONG).show();
                     if (p1.getSkillPoints() != 16) {
                         AlertDialog alertDialog = new AlertDialog.Builder(NameSkillPoints.this).create();
                         alertDialog.setTitle("Skill Point Allocation");
@@ -121,6 +122,7 @@ public class NameSkillPoints extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(), "Data Upated!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(NameSkillPoints.this, Registration.class);
+                        Toast.makeText(getApplicationContext(), "moved on", Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                     }
                 })

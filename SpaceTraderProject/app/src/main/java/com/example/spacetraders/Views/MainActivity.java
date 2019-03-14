@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
 
+        Toast.makeText(getApplicationContext(), currentUser.getUid(), Toast.LENGTH_LONG).show();
+
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
