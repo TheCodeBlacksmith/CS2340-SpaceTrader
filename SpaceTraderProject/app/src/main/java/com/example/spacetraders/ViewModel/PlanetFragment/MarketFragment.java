@@ -112,20 +112,22 @@ public class MarketFragment extends Fragment {
                 holder.buyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int itemQuantity = Integer.parseInt(holder.item_quantity.getText().toString());
-                        itemQuantity--;
-                        holder.item_quantity.setText(String.valueOf(itemQuantity));
-                        purchaseItem(model);
+                        if (purchaseItem(model) == 1) {
+                            int itemQuantity = Integer.parseInt(holder.item_quantity.getText().toString());
+                            itemQuantity--;
+                            holder.item_quantity.setText(String.valueOf(itemQuantity));
+                        }
                     }
                 });
                 holder.sellButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //Toast.makeText(getContext(), "Sell Button Clicked", Toast.LENGTH_SHORT).show();
-                        int itemQuantity = Integer.parseInt(holder.item_quantity.getText().toString());
-                        itemQuantity++;
-                        holder.item_quantity.setText(String.valueOf(itemQuantity));
-                        sellItem(model);
+                        if (sellItem(model) == 1) {
+                            int itemQuantity = Integer.parseInt(holder.item_quantity.getText().toString());
+                            itemQuantity++;
+                            holder.item_quantity.setText(String.valueOf(itemQuantity));
+                        }
                     }
                 });
             }
@@ -184,53 +186,96 @@ public class MarketFragment extends Fragment {
         }
     }
 
-    private void purchaseItem(final TradeGood model) {
-        mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+    private int purchaseItem(final TradeGood model) {
+        final int[] returnType = new int[1];
+
+        mPlayerDatabase.child(current_uID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dataSnapshot = dataSnapshot.child(model.getName());
-                if (dataSnapshot.exists()) {
-                    long newValue = (long) dataSnapshot.child("quantity").getValue();
-                    newValue++;
-                    mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
-                    Toast.makeText(getContext(), "Item sucessfully bought!", Toast.LENGTH_SHORT).show();
+                final long currentMoney = (long) dataSnapshot.child("money").getValue();
+                final long cargoCapacity = (long) dataSnapshot.child("cargoCapacity").getValue();
+                if (cargoCapacity < 10 && currentMoney >= model.getFinalPrice()) {
+                    mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            dataSnapshot = dataSnapshot.child(model.getName());
+                            if (dataSnapshot.exists()) {
+                                long newValue = (long) dataSnapshot.child("quantity").getValue();
+                                newValue++;
+                                mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
+                                Toast.makeText(getContext(), "Item sucessfully bought!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Map<String, Object> childUpdates = new HashMap<>();
+                                model.setQuantity(1);
+                                childUpdates.put(model.getName(), model);
+                                mCargoDatabase.updateChildren(childUpdates);
+                                Toast.makeText(getContext(), "Item sucessfully bought!", Toast.LENGTH_SHORT).show();
+                            }
+                            mPlayerDatabase.child(current_uID).child("cargoCapacity").setValue(cargoCapacity + 1);
+                            mPlayerDatabase.child(current_uID).child("money").setValue(currentMoney - model.getFinalPrice());
+                            returnType[0] = 1;
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 } else {
-                    Map<String, Object> childUpdates = new HashMap<>();
-                    model.setQuantity(1);
-                    childUpdates.put(model.getName(), model);
-                    mCargoDatabase.updateChildren(childUpdates);
-                    Toast.makeText(getContext(), "Item sucessfully bought!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "NO MONEY LEFT YO", Toast.LENGTH_SHORT).show();
+                    returnType[0] = 0;
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+        return returnType[0];
     }
 
 
-    private void sellItem(final TradeGood model) {
-        mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+    private int sellItem(final TradeGood model) {
+        final int[] returnType = new int[1];
+
+        mPlayerDatabase.child(current_uID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dataSnapshot = dataSnapshot.child(model.getName());
-                if (dataSnapshot.exists()) {
-                    long newValue = (long) dataSnapshot.child("quantity").getValue();
-                    newValue--;
-                    mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
-                    if (newValue == 0) {
-                        mCargoDatabase.child(model.getName()).removeValue();
+                final long currentMoney = (long) dataSnapshot.child("money").getValue();
+                final long cargoCapacity = (long) dataSnapshot.child("cargoCapacity").getValue();
+
+                mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        dataSnapshot = dataSnapshot.child(model.getName());
+                        if (dataSnapshot.exists()) {
+                            long newValue = (long) dataSnapshot.child("quantity").getValue();
+                            newValue--;
+                            mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
+                            if (newValue == 0) {
+                                mCargoDatabase.child(model.getName()).removeValue();
+                            }
+                            Toast.makeText(getContext(), "Item sucessfully sold!", Toast.LENGTH_SHORT).show();
+                            mPlayerDatabase.child(current_uID).child("cargoCapacity").setValue(cargoCapacity - 1);
+                            mPlayerDatabase.child(current_uID).child("money").setValue(currentMoney + model.getFinalPrice());
+                            returnType[0] = 1;
+                        } else {
+                            Toast.makeText(getContext(), "You have not bought this item", Toast.LENGTH_SHORT).show();
+                            returnType[0] = 0;
+                        }
                     }
-                    Toast.makeText(getContext(), "Item sucessfully sold!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "You have not bought this item", Toast.LENGTH_SHORT).show();
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+        return returnType[0];
     }
 }

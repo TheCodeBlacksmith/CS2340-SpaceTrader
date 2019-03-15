@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.spacetraders.Entity.TechLevel;
 import com.example.spacetraders.Entity.TradeGood;
@@ -28,6 +29,7 @@ import com.example.spacetraders.R;
 import com.example.spacetraders.ViewModel.PlanetFragment.CargoFragment;
 import com.example.spacetraders.ViewModel.PlanetFragment.MarketFragment;
 import com.example.spacetraders.ViewModel.PlanetFragment.PlanetInfoFragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,10 +45,15 @@ public class MarketPlaceViewer extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private DatabaseReference mMarketDatabase;
+    private DatabaseReference mPlayerDatabase;
 
     private String universeName;
     private String universeTechLevel;
     private int universeTechLevelInt;
+
+    private FirebaseUser mCurrentUser;
+    private String current_uID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +100,14 @@ public class MarketPlaceViewer extends AppCompatActivity {
         }
         mMarketDatabase.child(universeName).updateChildren(childUpdates);
 
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (FirebaseAuth.getInstance() ==  null) {
+            Toast.makeText(getApplicationContext(), "NULL USER", Toast.LENGTH_LONG).show();
+        }
+        current_uID = mCurrentUser.getUid();
+        mPlayerDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(current_uID);
+        mPlayerDatabase.child("cargoCapacity").setValue(0);
+        mPlayerDatabase.child("money").setValue(10000);
     }
 
     private void setupViewPager(ViewPager viewPager) {
