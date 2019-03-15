@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp">
+
+    <LinearLayout
+        android:id="@+id/universe_item_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:background="#FF9F46">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/market_item_title"
+                    android:layout_width="169dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/market_item_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/item_price"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/market_item_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/item_amount"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/market_buy_button"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="@android:color/holo_green_light"
+                    android:text="BUY" />
+
+                <Button
+                    android:id="@+id/market_sell_button"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/holo_orange_light"
+                    android:text="SELL" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
