@@ -1,5 +1,6 @@
 package com.example.spacetraders.ViewModel;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,17 +21,118 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.example.spacetraders.Entity.TechLevel;
+import com.example.spacetraders.Entity.TradeGood;
+import com.example.spacetraders.Model.MarketPlace;
 import com.example.spacetraders.R;
+import com.example.spacetraders.ViewModel.PlanetFragment.CargoFragment;
+import com.example.spacetraders.ViewModel.PlanetFragment.MarketFragment;
+import com.example.spacetraders.ViewModel.PlanetFragment.PlanetInfoFragment;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MarketPlaceViewer extends AppCompatActivity {
 
+    private SectionsPageAdapter mSectionsPageAdapter;
+    private ViewPager mViewPager;
 
+    private DatabaseReference mMarketDatabase;
+
+    private String universeName;
+    private String universeTechLevel;
+    private int universeTechLevelInt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place_viewer);
 
 
+        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
+        mViewPager = findViewById(R.id.container);
+        setupViewPager(mViewPager);
+
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            universeName = extras.getString("Universe name");
+            universeTechLevel = extras.getString("Universe_techlevel");
+        } else {
+            universeName = "Lave";
+            universeTechLevel = "well shit this sucks";
+        }
+
+        mMarketDatabase = FirebaseDatabase.getInstance().getReference().child("markets");
+        //mMarketDatabase.child(universeName).setValue(universeTechLevel);
+
+        HashMap<String, Integer> techLevelMap = new HashMap<>();
+        for (TechLevel x: TechLevel.values()) {
+            techLevelMap.put(x.name(), x.getCode());
+        }
+        universeTechLevelInt = techLevelMap.get(universeTechLevel);
+        MarketPlace planetMarket = new MarketPlace(universeTechLevelInt);
+
+        TradeGood[] planetMarketItems = planetMarket.getItemsForSale();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        for (TradeGood item: planetMarketItems) {
+            if (item != null) {
+                Map<String, Object> itemValues = item.toMap();
+                childUpdates.put(item.getName(), itemValues);
+            }
+        }
+        mMarketDatabase.child(universeName).updateChildren(childUpdates);
+
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MarketFragment(), "Market Tab");
+        adapter.addFragment(new CargoFragment(), "Cargo Tab");
+        adapter.addFragment(new PlanetInfoFragment(), "Planet Tab");
+        viewPager.setAdapter(adapter);
+    }
+
+
+    private class SectionsPageAdapter extends FragmentPagerAdapter {
+
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        public SectionsPageAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
     }
 }

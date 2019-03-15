@@ -37,7 +37,7 @@
                     android:id="@+id/market_item_title"
                     android:layout_width="169dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/item_name"
+                    android:text="item_name"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
                     android:layout_marginTop="4dp"
-                    android:text="@string/item_price"
+                    android:text="item_price"
                     android:textColor="#000000" />
 
                 <TextView
@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
                     android:layout_marginTop="2dp"
-                    android:text="@string/item_amount"
+                    android:text="item_amount"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textStyle="bold" />

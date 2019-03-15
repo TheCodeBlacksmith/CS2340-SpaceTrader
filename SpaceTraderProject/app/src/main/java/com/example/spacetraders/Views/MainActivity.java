@@ -42,10 +42,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        } else {
+            Toast.makeText(getApplicationContext(), currentUser.getUid(), Toast.LENGTH_LONG).show();
         }
-
-        Toast.makeText(getApplicationContext(), currentUser.getUid(), Toast.LENGTH_LONG).show();
-
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         buttonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MarketPlaceViewer.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
             }
         });

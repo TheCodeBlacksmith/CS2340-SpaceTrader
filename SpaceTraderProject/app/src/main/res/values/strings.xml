@@ -15,10 +15,6 @@
     </string>
     <string name="description">Description</string>
     <string name="solar_system_name">Solar System Name</string>
-    <string name="item_name">Item Name</string>
-    <string name="item_amount">0</string>
-    <string name="item_price">0.00</string>
-
     <string name="Location" />
     <string name="location">Location:</string>
     <string name="title_activity_planet_market_place">PlanetMarketPlace</string>
