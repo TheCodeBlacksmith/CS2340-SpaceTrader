@@ -112,7 +112,6 @@ public class MarketFragment extends Fragment {
                 holder.buyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "Buy Button Clicked", Toast.LENGTH_SHORT).show();
                         int itemQuantity = Integer.parseInt(holder.item_quantity.getText().toString());
                         itemQuantity--;
                         holder.item_quantity.setText(String.valueOf(itemQuantity));
@@ -122,10 +121,11 @@ public class MarketFragment extends Fragment {
                 holder.sellButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "Sell Button Clicked", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Sell Button Clicked", Toast.LENGTH_SHORT).show();
                         int itemQuantity = Integer.parseInt(holder.item_quantity.getText().toString());
                         itemQuantity++;
                         holder.item_quantity.setText(String.valueOf(itemQuantity));
+                        sellItem(model);
                     }
                 });
             }
@@ -184,12 +184,53 @@ public class MarketFragment extends Fragment {
         }
     }
 
-    private void purchaseItem(TradeGood model) {
-        Map<String, Object> childUpdates = new HashMap<>();
-        model.setQuantity(1);
-        childUpdates.put(model.getName(), model);
-        mCargoDatabase.updateChildren(childUpdates);
+    private void purchaseItem(final TradeGood model) {
+        mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot = dataSnapshot.child(model.getName());
+                if (dataSnapshot.exists()) {
+                    long newValue = (long) dataSnapshot.child("quantity").getValue();
+                    newValue++;
+                    mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
+                    Toast.makeText(getContext(), "Item sucessfully bought!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Map<String, Object> childUpdates = new HashMap<>();
+                    model.setQuantity(1);
+                    childUpdates.put(model.getName(), model);
+                    mCargoDatabase.updateChildren(childUpdates);
+                    Toast.makeText(getContext(), "Item sucessfully bought!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
+    private void sellItem(final TradeGood model) {
+        mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot = dataSnapshot.child(model.getName());
+                if (dataSnapshot.exists()) {
+                    long newValue = (long) dataSnapshot.child("quantity").getValue();
+                    newValue--;
+                    mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
+                    if (newValue == 0) {
+                        mCargoDatabase.child(model.getName()).removeValue();
+                    }
+                    Toast.makeText(getContext(), "Item sucessfully sold!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "You have not bought this item", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }
