@@ -1,5 +1,6 @@
 package com.example.spacetraders.ViewModel;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -31,8 +32,11 @@ import com.example.spacetraders.ViewModel.PlanetFragment.MarketFragment;
 import com.example.spacetraders.ViewModel.PlanetFragment.PlanetInfoFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,26 +83,37 @@ public class MarketPlaceViewer extends AppCompatActivity {
         }
 
         mMarketDatabase = FirebaseDatabase.getInstance().getReference().child("markets");
-        //mMarketDatabase.child(universeName).setValue(universeTechLevel);
 
-        HashMap<String, Integer> techLevelMap = new HashMap<>();
-        for (TechLevel x: TechLevel.values()) {
-            techLevelMap.put(x.name(), x.getCode());
-        }
-        universeTechLevelInt = techLevelMap.get(universeTechLevel);
-        MarketPlace planetMarket = new MarketPlace(universeTechLevelInt);
+        mMarketDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.hasChild(universeName)) {
+                    HashMap<String, Integer> techLevelMap = new HashMap<>();
+                    for (TechLevel x: TechLevel.values()) {
+                        techLevelMap.put(x.name(), x.getCode());
+                    }
+                    universeTechLevelInt = techLevelMap.get(universeTechLevel);
+                    MarketPlace planetMarket = new MarketPlace(universeTechLevelInt);
 
-        TradeGood[] planetMarketItems = planetMarket.getItemsForSale();
+                    TradeGood[] planetMarketItems = planetMarket.getItemsForSale();
 
-        Map<String, Object> childUpdates = new HashMap<>();
+                    Map<String, Object> childUpdates = new HashMap<>();
 
-        for (TradeGood item: planetMarketItems) {
-            if (item != null) {
-                Map<String, Object> itemValues = item.toMap();
-                childUpdates.put(item.getName(), itemValues);
+                    for (TradeGood item: planetMarketItems) {
+                        if (item != null) {
+                            Map<String, Object> itemValues = item.toMap();
+                            childUpdates.put(item.getName(), itemValues);
+                        }
+                    }
+                    mMarketDatabase.child(universeName).updateChildren(childUpdates);
+                }
             }
-        }
-        mMarketDatabase.child(universeName).updateChildren(childUpdates);
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (FirebaseAuth.getInstance() ==  null) {
@@ -106,8 +121,7 @@ public class MarketPlaceViewer extends AppCompatActivity {
         }
         current_uID = mCurrentUser.getUid();
         mPlayerDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(current_uID);
-        mPlayerDatabase.child("cargoCapacity").setValue(0);
-        mPlayerDatabase.child("money").setValue(10000);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

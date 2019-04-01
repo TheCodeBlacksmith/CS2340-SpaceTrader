@@ -77,4 +77,19 @@ public class Universe {
     public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
+
+    @Override
+    public String toString() {
+        return "Universe{" +
+                "planet='" + planet + '\'' +
+                ", resource='" + resource + '\'' +
+                ", techLevel='" + techLevel + '\'' +
+                ", xCoordinate=" + xCoordinate +
+                ", yCoordinate=" + yCoordinate +
+                '}';
+    }
+
+    public String getLocationString() {
+        return "<" + xCoordinate + ", " + yCoordinate + ">";
+    }
 }

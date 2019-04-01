@@ -74,5 +74,32 @@
             android:layout_weight="0"
             android:paddingLeft="20dp"
             android:text="Engineer Points:" />
+
+        <TextView
+            android:id="@+id/profileAvailableFuel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Available Fuel:"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="193dp" />
+
+        <TextView
+            android:id="@+id/profileCurrentPlanet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Current Planet"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="193dp" />
+
+        <TextView
+            android:id="@+id/profileCurrentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Current Location:"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="193dp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

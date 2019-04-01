@@ -42,8 +42,8 @@ public class MarketFragment extends Fragment {
     private DatabaseReference mPlayerDatabase;
     private DatabaseReference mMarketDatabase;
     private DatabaseReference mCargoDatabase;
-    String currentMarket = "";
 
+    private final int MAXCARGOCAPACITY = 10;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -84,13 +84,14 @@ public class MarketFragment extends Fragment {
     }
 
     private void showMarket() {
+        final String[] currentMarket = new String[1];
 
         mPlayerDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         mPlayerDatabase.child(mCurrentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentMarket = (String) dataSnapshot.child("currentPlanet").getValue();
-                Log.i("Current Market Location", currentMarket);
+                currentMarket[0] = (String) dataSnapshot.child("currentPlanet").getValue();
+                Log.i("Current Market Location", currentMarket[0]);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -99,8 +100,8 @@ public class MarketFragment extends Fragment {
         });
 
 
-
-        Query query = mMarketDatabase.child("Lave");
+        Toast.makeText(getContext(), "Current Market is: " + currentMarket[0], Toast.LENGTH_SHORT).show();
+        Query query = mMarketDatabase.child("Balosnee");
         FirebaseRecyclerOptions<TradeGood> options = new FirebaseRecyclerOptions.Builder<TradeGood>()
                 .setQuery(query, TradeGood.class)
                 .build();
@@ -194,7 +195,7 @@ public class MarketFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final long currentMoney = (long) dataSnapshot.child("money").getValue();
                 final long cargoCapacity = (long) dataSnapshot.child("cargoCapacity").getValue();
-                if (cargoCapacity < 10 && currentMoney >= model.getFinalPrice()) {
+                if (cargoCapacity < MAXCARGOCAPACITY && currentMoney >= model.getFinalPrice()) {
                     mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

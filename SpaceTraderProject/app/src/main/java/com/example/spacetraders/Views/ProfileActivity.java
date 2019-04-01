@@ -31,6 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView profileFigherPoints;
     private TextView profileTraderPoints;
     private TextView profileEngineerPoints;
+    private TextView profileAvailableFuel;
+    private TextView profileCurrentPlanet;
+    private TextView profileCurrentLoc;
 
 
     @Override
@@ -45,6 +48,9 @@ public class ProfileActivity extends AppCompatActivity {
         profileFigherPoints = findViewById(R.id.profileFighterPoints);
         profileTraderPoints = findViewById(R.id.profileTraderPoints);
         profileEngineerPoints = findViewById(R.id.profileEngineerPoints);
+        profileAvailableFuel = findViewById(R.id.profileAvailableFuel);
+        profileCurrentPlanet = findViewById(R.id.profileCurrentPlanet);
+        profileCurrentLoc = findViewById(R.id.profileCurrentLocation);
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 //        if (FirebaseAuth.getInstance() ==  null) {
@@ -66,7 +72,10 @@ public class ProfileActivity extends AppCompatActivity {
                 profileFigherPoints.setText(profileFigherPoints.getText().toString() + " " + dataSnapshot.child("fighterPoints").getValue().toString());
                 profileTraderPoints.setText(profileTraderPoints.getText().toString() + " " + dataSnapshot.child("traderPoints").getValue().toString());
                 profileEngineerPoints.setText(profileEngineerPoints.getText().toString() + " " + dataSnapshot.child("engineerPoints").getValue().toString());
-
+                profileAvailableFuel.setText("Available Fuel: " + dataSnapshot.child("shipFuel").getValue().toString());
+                profileCurrentPlanet.setText("Current Planet: " + dataSnapshot.child("currentPlanet").getValue().toString());
+                profileCurrentLoc.setText("Current Location: " + "<" + dataSnapshot.child("currentXCoord").getValue().toString() + ", " + dataSnapshot.child("currentYCoord").getValue().toString() + ">");
+                //TODO: Default values if planet, and location hasnt been set yet
             }
 
             @Override
