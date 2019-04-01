@@ -51,7 +51,7 @@ public class MarketPlaceViewer extends AppCompatActivity {
     private DatabaseReference mMarketDatabase;
     private DatabaseReference mPlayerDatabase;
 
-    private String universeName;
+    public static String universeName;
     private String universeTechLevel;
     private int universeTechLevelInt;
 

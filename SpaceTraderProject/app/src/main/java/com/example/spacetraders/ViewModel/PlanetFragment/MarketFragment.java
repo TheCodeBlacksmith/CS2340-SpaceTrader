@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.spacetraders.Entity.TradeGood;
 import com.example.spacetraders.Model.Player;
 import com.example.spacetraders.R;
+import com.example.spacetraders.ViewModel.MarketPlaceViewer;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,7 +78,7 @@ public class MarketFragment extends Fragment {
         }
         current_uID = mCurrentUser.getUid();
 
-
+        mPlayerDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         mMarketDatabase = FirebaseDatabase.getInstance().getReference().child("markets");
         mCargoDatabase = FirebaseDatabase.getInstance().getReference().child("cargo").child(current_uID);
         //Log.i("Current Market Location2", currentMarket);
@@ -86,22 +87,9 @@ public class MarketFragment extends Fragment {
     private void showMarket() {
         final String[] currentMarket = new String[1];
 
-        mPlayerDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        mPlayerDatabase.child(mCurrentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentMarket[0] = (String) dataSnapshot.child("currentPlanet").getValue();
-                Log.i("Current Market Location", currentMarket[0]);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
-
-        Toast.makeText(getContext(), "Current Market is: " + currentMarket[0], Toast.LENGTH_SHORT).show();
-        Query query = mMarketDatabase.child("Balosnee");
+        //Toast.makeText(getContext(), "Current Market is: " + MarketPlaceViewer.universeName, Toast.LENGTH_SHORT).show();
+        Query query = mMarketDatabase.child(MarketPlaceViewer.universeName);
         FirebaseRecyclerOptions<TradeGood> options = new FirebaseRecyclerOptions.Builder<TradeGood>()
                 .setQuery(query, TradeGood.class)
                 .build();
@@ -115,7 +103,9 @@ public class MarketFragment extends Fragment {
                     public void onClick(View v) {
                         if (purchaseItem(model) == 1) {
                             int itemQuantity = Integer.parseInt(holder.item_quantity.getText().toString());
+                            Log.i("Buying Item:", holder.item_name.getText().toString() + " " + String.valueOf(itemQuantity));
                             itemQuantity--;
+                            Log.i("Buying Item:", holder.item_name.getText().toString() + " " + String.valueOf(itemQuantity));
                             holder.item_quantity.setText(String.valueOf(itemQuantity));
                         }
                     }
@@ -221,6 +211,8 @@ public class MarketFragment extends Fragment {
 
                         }
                     });
+                    //Toast.makeText(getContext(), String.valueOf(model.getQuantity()), Toast.LENGTH_SHORT).show();
+                    mMarketDatabase.child(MarketPlaceViewer.universeName).child(model.getName()).child("quantity").setValue((model.getQuantity()) - 1);
                 } else {
                     Toast.makeText(getContext(), "NO MONEY LEFT YO", Toast.LENGTH_SHORT).show();
                     returnType[0] = 0;
@@ -260,6 +252,7 @@ public class MarketFragment extends Fragment {
                             mPlayerDatabase.child(current_uID).child("cargoCapacity").setValue(cargoCapacity - 1);
                             mPlayerDatabase.child(current_uID).child("money").setValue(currentMoney + model.getFinalPrice());
                             returnType[0] = 1;
+                            mMarketDatabase.child(MarketPlaceViewer.universeName).child(model.getName()).child("quantity").setValue((model.getQuantity()) + 1);
                         } else {
                             Toast.makeText(getContext(), "You have not bought this item", Toast.LENGTH_SHORT).show();
                             returnType[0] = 0;
