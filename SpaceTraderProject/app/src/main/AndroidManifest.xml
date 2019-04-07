@@ -19,8 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ViewModel.MarketPlaceViewer"
-            android:label="@string/title_activity_market_place_viewer"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_market_place_viewer">
         </activity>
         <activity android:name=".ViewModel.UniverseSelectionActivity" />
         <activity android:name=".Views.ProfileActivity" />

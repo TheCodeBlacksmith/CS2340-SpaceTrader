@@ -53,6 +53,7 @@ public class CargoFragment extends Fragment {
         current_uID = mCurrentUser.getUid();
 
         mCargoDatabase = FirebaseDatabase.getInstance().getReference().child("cargo").child(current_uID);
+        mCargoDatabase.keepSynced(true);
 
         return view;
     }

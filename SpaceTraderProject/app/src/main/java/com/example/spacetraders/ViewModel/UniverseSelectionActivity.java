@@ -54,12 +54,13 @@ public class UniverseSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_universe_selection);
 
         recyclerView = findViewById(R.id.universe_list);
-
-
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         mUniverseDatabase = FirebaseDatabase.getInstance().getReference().child("universe");
+        mUniverseDatabase.keepSynced(true);
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (FirebaseAuth.getInstance() ==  null) {
@@ -67,6 +68,7 @@ public class UniverseSelectionActivity extends AppCompatActivity {
         }
         current_uID = mCurrentUser.getUid();
         mPlayerDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        mPlayerDatabase.keepSynced(true);
 
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();

@@ -2,11 +2,13 @@ package com.example.spacetraders.ViewModel.PlanetFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +27,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +35,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 
 
 public class MarketFragment extends Fragment {
@@ -72,6 +78,8 @@ public class MarketFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (FirebaseAuth.getInstance() ==  null) {
             Toast.makeText(getContext(), "NULL USER", Toast.LENGTH_LONG).show();
@@ -79,9 +87,14 @@ public class MarketFragment extends Fragment {
         current_uID = mCurrentUser.getUid();
 
         mPlayerDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        mPlayerDatabase.keepSynced(true);
         mMarketDatabase = FirebaseDatabase.getInstance().getReference().child("markets");
+        mMarketDatabase.keepSynced(true);
         mCargoDatabase = FirebaseDatabase.getInstance().getReference().child("cargo").child(current_uID);
+        mCargoDatabase.keepSynced(true);
         //Log.i("Current Market Location2", currentMarket);
+
+
     }
 
     private void showMarket() {
@@ -167,7 +180,42 @@ public class MarketFragment extends Fragment {
         if (mAdapter != null) {
             mAdapter.startListening();
         }
+
+        DatabaseReference mEventsDatabase = FirebaseDatabase.getInstance().getReference().child("events");
+
+        int dateTime = (int) (new Date().getTime()/1000);
+        dateTime = dateTime % 100;
+        mEventsDatabase.child("chance").setValue(dateTime);
+
+        if (dateTime < 5) {
+            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+            alertDialog.setTitle("Alert!");
+            alertDialog.setMessage("Space Pirates attacked your ship and stole 30% of your money!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+            final DatabaseReference mUserDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(current_uID);
+            mUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    long currMoney = (long) dataSnapshot.child("money").getValue();
+                    mUserDatabase.child("money").setValue(Math.round(currMoney * 0.7));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
     }
+
 
     @Override
     public void onStop() {
