@@ -5,7 +5,7 @@ public class Planet {
             "Acamar",
             "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"
             "Aldea",
-            "Andevian",
+            "Andevian",  // brains -zombie who i never met
             "Antedi",
             "Balosnee",
             "Baratas",

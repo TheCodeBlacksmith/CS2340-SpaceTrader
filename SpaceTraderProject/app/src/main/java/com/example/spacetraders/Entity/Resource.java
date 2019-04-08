@@ -3,7 +3,7 @@ package com.example.spacetraders.Entity;
 public enum Resource {
     NOSPECIALRESOURCES, MINERALRICH, MINERALPOOR, DESERT, LOTSOFWATER, RICHSOIL, POORSOIL, RICHFAUNA,
     LIFELESS, WEIRDMUSHROOMS, LOTSOFHERBS, ARTISTIC, WARLIKE
-
+    
     // TODO:
 //    mode1 ("Fancy Mode 1"),
 //    mode2 ("Fancy Mode 2"),
