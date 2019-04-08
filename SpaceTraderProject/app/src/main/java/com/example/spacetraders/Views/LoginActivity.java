@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 /**
  * A login screen that offers login via email/password.
  */
+@SuppressWarnings("TodoComment")
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                if ((id == EditorInfo.IME_ACTION_DONE) || (id == EditorInfo.IME_NULL)) {
                     attemptLogin();
                     return true;
                 }
@@ -193,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
         return email.contains("@");
     }
 
-    private boolean isPasswordValid(String password) {
+    private boolean isPasswordValid(CharSequence password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }

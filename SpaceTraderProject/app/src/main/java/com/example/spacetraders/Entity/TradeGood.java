@@ -85,7 +85,7 @@ public class TradeGood {
     }
 
     public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         result.put("name", name);
         result.put("basePrice", basePrice);
         result.put("variance", variance);
@@ -98,7 +98,7 @@ public class TradeGood {
     }
 
     public void calculateFinalPrice(int planetTechLevel) {
-        finalPrice = Math.abs(basePrice + 3 * 2 * (ipl * (planetTechLevel - mtlp))
+        finalPrice = Math.abs(basePrice + (3 * 2 * (ipl * (planetTechLevel - mtlp)))
                 + (int) (Math.random() * variance));
     }
 

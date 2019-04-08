@@ -233,7 +233,7 @@ public class MarketFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final long currentMoney = (long) dataSnapshot.child("money").getValue();
                 final long cargoCapacity = (long) dataSnapshot.child("cargoCapacity").getValue();
-                if (cargoCapacity < MAXCARGOCAPACITY && currentMoney >= model.getFinalPrice()) {
+                if ((cargoCapacity < MAXCARGOCAPACITY) && (currentMoney >= model.getFinalPrice())) {
                     mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

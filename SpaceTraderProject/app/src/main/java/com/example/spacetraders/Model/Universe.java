@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class Universe {
 
-    public String planet;
-    public String resource;
-    public String techLevel;
-    public int xCoordinate;
-    public int yCoordinate;
+    private String planet;
+    private String resource;
+    private String techLevel;
+    private int xCoordinate;
+    private int yCoordinate;
 
     public Universe() {
 
@@ -28,7 +28,7 @@ public class Universe {
     }
 
     public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         result.put("planet", planet);
         result.put("resource", resource);
         result.put("techLevel", techLevel);

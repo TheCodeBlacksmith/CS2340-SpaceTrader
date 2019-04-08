@@ -62,10 +62,10 @@ public class Player {
         } else {
             playerType = "Engineer Points";
         }
-        if (type == 1 && skillPoints < 16 && skillPointsMap.get(playerType) <= 15) {
+        if ((type == 1) && (skillPoints < 16) && (skillPointsMap.get(playerType) <= 15)) {
             skillPointsMap.put(playerType, skillPointsMap.get(playerType) + 1);
             skillPoints++;
-        } else if (type == -1 && skillPoints > 0 && skillPointsMap.get(playerType) >= 1) {
+        } else if ((type == -1) && (skillPoints > 0) && (skillPointsMap.get(playerType) >= 1)) {
             skillPointsMap.put(playerType, skillPointsMap.get(playerType) - 1);
             skillPoints--;
         }
