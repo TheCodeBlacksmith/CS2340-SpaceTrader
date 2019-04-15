@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 public class MarketFragmentTest {
 
+
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
@@ -25,4 +26,5 @@ public class MarketFragmentTest {
     public void purchase_itemNull() {
         assertNull("A null tradegood", null);
     }
+
 }
