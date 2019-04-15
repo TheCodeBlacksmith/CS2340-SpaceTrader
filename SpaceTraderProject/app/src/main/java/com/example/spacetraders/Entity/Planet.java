@@ -1,7 +1,7 @@
 package com.example.spacetraders.Entity;
 
 public class Planet {
-    public static String[] SolarNames = {
+    public static final String[] SolarNames = {
             "Acamar",
             "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"
             "Aldea",

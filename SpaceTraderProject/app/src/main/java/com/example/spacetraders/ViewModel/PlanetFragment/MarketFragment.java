@@ -150,13 +150,13 @@ public class MarketFragment extends Fragment {
 
     private class TradeGoodHolder extends RecyclerView.ViewHolder {
 
-        TextView item_name;
-        TextView item_price;
-        TextView item_quantity;
-        Button buyButton;
-        Button sellButton;
+        final TextView item_name;
+        final TextView item_price;
+        final TextView item_quantity;
+        final Button buyButton;
+        final Button sellButton;
 
-        public TradeGoodHolder(@NonNull View itemView) {
+        TradeGoodHolder(@NonNull View itemView) {
             super(itemView);
             item_name = itemView.findViewById(R.id.market_item_title);
             item_price = itemView.findViewById(R.id.market_item_price);
@@ -166,7 +166,7 @@ public class MarketFragment extends Fragment {
         }
 
         @SuppressLint("SetTextI18n")
-        public void setDetails(TradeGood model) {
+        void setDetails(TradeGood model) {
             //item_name.setText(model.getName());
             item_name.setText(model.getName());
             item_price.setText(String.valueOf(model.getFinalPrice()));
@@ -237,9 +237,9 @@ public class MarketFragment extends Fragment {
                     mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            dataSnapshot = dataSnapshot.child(model.getName());
-                            if (dataSnapshot.exists()) {
-                                long newValue = (long) dataSnapshot.child("quantity").getValue();
+                            DataSnapshot dataSnapshot1 = dataSnapshot.child(model.getName());
+                            if (dataSnapshot1.exists()) {
+                                long newValue = (long) dataSnapshot1.child("quantity").getValue();
                                 newValue++;
                                 mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
                                 Toast.makeText(getContext(), "Item sucessfully bought!", Toast.LENGTH_SHORT).show();
@@ -288,9 +288,9 @@ public class MarketFragment extends Fragment {
                 mCargoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        dataSnapshot = dataSnapshot.child(model.getName());
-                        if (dataSnapshot.exists()) {
-                            long newValue = (long) dataSnapshot.child("quantity").getValue();
+                        DataSnapshot dataSnapshot1 = dataSnapshot.child(model.getName());
+                        if (dataSnapshot1.exists()) {
+                            long newValue = (long) dataSnapshot1.child("quantity").getValue();
                             newValue--;
                             mCargoDatabase.child(model.getName()).child("quantity").setValue(newValue);
                             if (newValue == 0) {

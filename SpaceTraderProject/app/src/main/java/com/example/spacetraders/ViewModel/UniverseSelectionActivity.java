@@ -192,11 +192,11 @@ public class UniverseSelectionActivity extends AppCompatActivity {
 
     private class UniverseViewHolder extends RecyclerView.ViewHolder {
 
-        TextView universe_title;
-        TextView universe_desc;
-        TextView universe_loc;
+        final TextView universe_title;
+        final TextView universe_desc;
+        final TextView universe_loc;
 
-        public UniverseViewHolder(View itemView) {
+        UniverseViewHolder(View itemView) {
             super(itemView);
             universe_title = itemView.findViewById(R.id.universe_item_title);
             universe_desc = itemView.findViewById(R.id.universe_item_desc);
@@ -230,7 +230,7 @@ public class UniverseSelectionActivity extends AppCompatActivity {
 
         }
         @SuppressLint("SetTextI18n")
-        public void setDetails(Universe model) {
+        void setDetails(Universe model) {
             universe_title.setText(model.getPlanet());
             // description: A <planet> with <resource> resources and <techlevel> techlevel
             // located at <x, y>

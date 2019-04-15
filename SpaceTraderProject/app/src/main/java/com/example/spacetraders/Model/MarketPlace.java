@@ -4,7 +4,7 @@ import com.example.spacetraders.Entity.TradeGood;
 
 public class MarketPlace {
 
-    private TradeGood[] itemsForSale = {
+    private final TradeGood[] itemsForSale = {
             new TradeGood("Water", 30, 4, 3, 0),
             new TradeGood("Furs", 250, 10, 10, 0),
             new TradeGood("Food", 100, 5, 5, 1),

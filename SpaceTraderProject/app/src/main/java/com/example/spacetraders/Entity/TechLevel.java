@@ -10,7 +10,7 @@ public enum TechLevel {
     POSTINDUSTRIAL (6),
     HITECH (7);
 
-    int code;
+    final int code;
 
     TechLevel(int code) {
         this.code = code;

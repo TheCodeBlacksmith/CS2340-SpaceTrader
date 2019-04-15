@@ -21,11 +21,11 @@ public class Registration extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
 
-    Button buttonBeginner;
-    Button buttonEasy;
-    Button buttonNormal;
-    Button buttonHard;
-    Button buttonImpossible;
+    private Button buttonBeginner;
+    private Button buttonEasy;
+    private Button buttonNormal;
+    private Button buttonHard;
+    private Button buttonImpossible;
     String difficultyLevel = "Normal";
 
     @Override

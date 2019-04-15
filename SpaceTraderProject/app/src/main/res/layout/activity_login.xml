@@ -85,7 +85,8 @@
                 android:clickable="true"
                 android:text="Need to Register?"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="KeyboardInaccessibleWidget" />
 
         </LinearLayout>
     </ScrollView>

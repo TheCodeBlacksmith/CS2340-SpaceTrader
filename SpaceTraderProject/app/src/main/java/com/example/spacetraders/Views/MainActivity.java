@@ -21,10 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonProfile;
-    Button signOutButton;
-    Button exitAppButton;
-    Button buttonUniverse;
+    private Button buttonProfile;
+    private Button signOutButton;
+    private Button exitAppButton;
+    private Button buttonUniverse;
     private FirebaseAuth mAuth;
 
     private FirebaseUser mCurrentUser;

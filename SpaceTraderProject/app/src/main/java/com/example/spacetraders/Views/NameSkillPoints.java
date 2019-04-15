@@ -28,23 +28,23 @@ public class NameSkillPoints extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
 
-    EditText name;
-    Button submitButton;
-    Button plusButtonPilot;
-    Button plusButtonFighter;
-    Button plusButtonTrader;
-    Button plusButtonEngineer;
-    Button minusButtonPilot;
-    Button minusButtonFighter;
-    Button minusButtonTrader;
-    Button minusButtonEngineer;
+    private EditText name;
+    private Button submitButton;
+    private Button plusButtonPilot;
+    private Button plusButtonFighter;
+    private Button plusButtonTrader;
+    private Button plusButtonEngineer;
+    private Button minusButtonPilot;
+    private Button minusButtonFighter;
+    private Button minusButtonTrader;
+    private Button minusButtonEngineer;
 
-    TextView pilotPoints;
-    TextView fighterPoints;
-    TextView traderPoints;
-    TextView engineerPoints;
+    private TextView pilotPoints;
+    private TextView fighterPoints;
+    private TextView traderPoints;
+    private TextView engineerPoints;
 
-    Player p1;
+    private Player p1;
 
     int spCounter = 16;
 
@@ -92,7 +92,7 @@ public class NameSkillPoints extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!name.getText().toString().equals("")) {
+                if (!"".equals(name.getText().toString())) {
                     //Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_LONG).show();
                     if (p1.getSkillPoints() != 16) {
                         AlertDialog alertDialog = new AlertDialog.Builder(NameSkillPoints.this).create();
@@ -156,7 +156,7 @@ public class NameSkillPoints extends AppCompatActivity {
         updateSPFields();
     }
 
-    public void updateSPFields() {
+    private void updateSPFields() {
         pilotPoints.setText("Skill Points: " + String.valueOf(p1.getPilotPoints()));
         fighterPoints.setText("Skill Points: " + String.valueOf(p1.getFighterPoints()));
         traderPoints.setText("Skill Points: " + String.valueOf(p1.getTraderPoints()));

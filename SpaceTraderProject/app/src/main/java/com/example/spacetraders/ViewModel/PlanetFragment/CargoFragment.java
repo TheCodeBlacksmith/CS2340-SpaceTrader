@@ -101,11 +101,11 @@ public class CargoFragment extends Fragment {
 
     private class CargoGoodHolder extends RecyclerView.ViewHolder {
 
-        TextView item_name;
-        TextView item_price;
-        TextView item_quantity;
+        final TextView item_name;
+        final TextView item_price;
+        final TextView item_quantity;
 
-        public CargoGoodHolder(@NonNull View itemView) {
+        CargoGoodHolder(@NonNull View itemView) {
             super(itemView);
             item_name = itemView.findViewById(R.id.store_item_title);
             item_price = itemView.findViewById(R.id.store_item_price);
@@ -114,7 +114,7 @@ public class CargoFragment extends Fragment {
         }
 
         @SuppressLint("SetTextI18n")
-        public void setDetails(TradeGood model) {
+        void setDetails(TradeGood model) {
             //item_name.setText(model.getName());
             item_name.setText(model.getName());
             item_price.setText(String.valueOf(model.getFinalPrice()));

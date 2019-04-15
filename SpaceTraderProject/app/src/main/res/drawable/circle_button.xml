@@ -1,8 +1,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <size android:width="0dp"
+    <size
+        android:width="0dp"
         android:background="@android:color/transparent"
-        android:height="1dp"></size>
+        android:height="1dp" />
 
 
 </shape>
