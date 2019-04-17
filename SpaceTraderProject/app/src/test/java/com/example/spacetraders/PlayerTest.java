@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@SuppressWarnings("ALL")
 public class PlayerTest extends P_T_D{
     @Test
     public void addition_isCorrect() {
@@ -24,6 +25,7 @@ public class PlayerTest extends P_T_D{
         assertEquals(2, playerHealthEnding);
         assertEquals(0, pirateDamage - pirateDamage);
         assertEquals(true, pirateDeath);
+        assertEquals("hello RISHAAAB", "hello RISHAAAB");
     }
 
 //    @Test

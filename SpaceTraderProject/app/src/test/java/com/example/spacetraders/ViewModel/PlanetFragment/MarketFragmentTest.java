@@ -2,14 +2,12 @@ package com.example.spacetraders.ViewModel.PlanetFragment;
 
 import com.example.spacetraders.Entity.TradeGood;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("ALL")
 public class MarketFragmentTest {
-
 
     @Test
     public void addition_isCorrect() {

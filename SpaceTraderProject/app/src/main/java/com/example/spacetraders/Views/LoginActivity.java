@@ -1,5 +1,6 @@
 package com.example.spacetraders.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,15 +27,12 @@ import com.google.firebase.auth.FirebaseAuth;
 /**
  * A login screen that offers login via email/password.
  */
-@SuppressWarnings("TodoComment")
 public class LoginActivity extends AppCompatActivity {
 
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
     private TextView switchLoginStatus;
     private Button mEmailSignInButton;
     private Boolean loginStatus = true;  // if true, means user wants to log in | false, user wants to register
@@ -47,14 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mEmailSignInButton= (Button) findViewById(R.id.email_sign_in_button);
+        mEmailView = findViewById(R.id.email);
+        mPasswordView = findViewById(R.id.password);
+        mEmailSignInButton= findViewById(R.id.email_sign_in_button);
 
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-        switchLoginStatus = (TextView) findViewById(R.id.loginSwitchButton);
+        switchLoginStatus = findViewById(R.id.loginSwitchButton);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -82,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         switchLoginStatus.setOnClickListener(new OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 if (loginStatus) {
@@ -159,12 +155,15 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), NameSkillPoints.class);
+                            Toast.makeText(getApplicationContext(), "Success!",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(),
+                                    NameSkillPoints.class);
                             startActivity(intent);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -178,27 +177,38 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), NameSkillPoints.class);
+                            Toast.makeText(getApplicationContext(), "Success!",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(),
+                                    NameSkillPoints.class);
                             startActivity(intent);
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+    @SuppressWarnings("JavaDoc")
+    public boolean isEmailValid(String email) {
+        if (email != null) {
+            return email.contains("@");
+        } else {
+            return false;
+        }
     }
 
-    private boolean isPasswordValid(CharSequence password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+    @SuppressWarnings("JavaDoc")
+    public boolean isPasswordValid(CharSequence password) {
+        if (password != null) {
+            return password.length() > 4;
+        } else {
+            return false;
+        }
     }
 
 
-    }
+}
 

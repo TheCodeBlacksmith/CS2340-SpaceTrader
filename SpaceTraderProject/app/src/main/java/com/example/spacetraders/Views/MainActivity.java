@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.spacetraders.R;
-import com.example.spacetraders.ViewModel.MarketPlaceViewer;
 import com.example.spacetraders.ViewModel.UniverseSelectionActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonProfile;
@@ -119,6 +119,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void changeSP(View view) {
     }
-}
+
+    public void changeSP(View view) {
+    }
+
+    public void changeSP(View view) {
+    }
+
+    public void changeSP(View view) {
+    }
+
+    public void changeSP(View view) {
+    }
+
+    public void changeSP(View view) {
+    }
+
+    public void changeSP(View view) {
+    }
+
+    public void changeSP(View view) {
+    }}

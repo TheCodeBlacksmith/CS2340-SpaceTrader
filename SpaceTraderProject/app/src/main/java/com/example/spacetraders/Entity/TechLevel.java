@@ -1,5 +1,6 @@
 package com.example.spacetraders.Entity;
 
+@SuppressWarnings("ALL")
 public enum TechLevel {
     PREAGRICULTURE (0),
     AGRICULTURE (1),

@@ -5,6 +5,7 @@ import com.example.spacetraders.Model.DifficultyLevel;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class Player {
 
     private String email;
@@ -93,8 +94,8 @@ public class Player {
         HashMap<String, Integer> map = new HashMap<>();
         String[] playerTypes = new String[] {"Pilot Points", "Fighter Points", "Trader Points",
                 "Engineer Points"};
-        for (int i = 0; i < playerTypes.length; i++) {
-            map.put(playerTypes[i], 4);
+        for (String playerType : playerTypes) {
+            map.put(playerType, 4);
         }
         return map;
     }

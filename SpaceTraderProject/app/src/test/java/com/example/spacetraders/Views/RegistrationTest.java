@@ -4,15 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("ALL")
 public class RegistrationTest {
-
-    @Test
-    public void onCreate() {
-    }
-
-    @Test
-    public void onStart() {
-    }
 
     @Test
     public void onDifficultyButtonClicked() {

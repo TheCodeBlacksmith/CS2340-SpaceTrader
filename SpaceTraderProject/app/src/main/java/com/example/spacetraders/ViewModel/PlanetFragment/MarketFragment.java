@@ -37,6 +37,7 @@ import java.util.Map;
 
 
 
+@SuppressWarnings("ALL")
 public class MarketFragment extends Fragment {
 
     private FirebaseUser mCurrentUser;

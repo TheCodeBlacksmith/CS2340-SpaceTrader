@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Player</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.example.spacetraders.Model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Player (com.example.spacetraders.Model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Player</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (9/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (28/ 42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.example.spacetraders.Model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.example.spacetraders.Model.DifficultyLevel;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.HashMap;
+<i>6</i>&nbsp;import java.util.Map;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;@SuppressWarnings(&quot;ALL&quot;)
+<i>9</i>&nbsp;public class Player {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    private String email;
+<i>12</i>&nbsp;    private String userName;
+<i>13</i>&nbsp;    private DifficultyLevel difficultyLevel;
+<i>14</i>&nbsp;    //private int[] skillPointsDistrib = new int[] {4, 4, 4, 4};
+<i>15</i>&nbsp;    private Map&lt;String, Integer&gt; skillPointsMap;
+<b class="fc"><i>16</i>&nbsp;    private int skillPoints = 16;</b>
+<i>17</i>&nbsp;
+<b class="nc"><i>18</i>&nbsp;    public Player() {</b>
+<i>19</i>&nbsp;
+<b class="nc"><i>20</i>&nbsp;    }</b>
+<i>21</i>&nbsp;
+<b class="fc"><i>22</i>&nbsp;    public Player(String email, String userName, DifficultyLevel difficultyLevel) {</b>
+<b class="fc"><i>23</i>&nbsp;        this.email = email;</b>
+<b class="fc"><i>24</i>&nbsp;        this.userName = userName;</b>
+<b class="fc"><i>25</i>&nbsp;        this.difficultyLevel = difficultyLevel;</b>
+<b class="fc"><i>26</i>&nbsp;        this.skillPointsMap = convertDefaultArraytoMap();</b>
+<b class="fc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public Player(String email, String userName) {
+<b class="fc"><i>30</i>&nbsp;        this(email, userName, DifficultyLevel.BEGINNER);</b>
+<b class="fc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public String getUserName() {
+<b class="nc"><i>34</i>&nbsp;        return userName;</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public void setUserName(String userName) {
+<b class="nc"><i>38</i>&nbsp;        this.userName = userName;</b>
+<b class="nc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public DifficultyLevel getDifficultyLevel() {
+<b class="nc"><i>42</i>&nbsp;        return difficultyLevel;</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    public String getEmail() {
+<b class="nc"><i>46</i>&nbsp;        return email;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public void setEmail(String email) {
+<b class="nc"><i>50</i>&nbsp;        this.email = email;</b>
+<b class="nc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    public void changePoints(int pos, int type) {
+<i>54</i>&nbsp;        // pos: 0 = pilot, 1 = fighter, 2 = trader, 3 = engineer
+<i>55</i>&nbsp;        // type: 1 = +1, -1 = -1
+<i>56</i>&nbsp;        String playerType;
+<b class="fc"><i>57</i>&nbsp;        if (pos == 0) {</b>
+<b class="fc"><i>58</i>&nbsp;            playerType = &quot;Pilot Points&quot;;</b>
+<b class="fc"><i>59</i>&nbsp;        } else if (pos == 1) {</b>
+<b class="fc"><i>60</i>&nbsp;            playerType = &quot;Fighter Points&quot;;</b>
+<b class="fc"><i>61</i>&nbsp;        } else if (pos == 2) {</b>
+<b class="fc"><i>62</i>&nbsp;            playerType = &quot;Trader Points&quot;;</b>
+<i>63</i>&nbsp;        } else {
+<b class="fc"><i>64</i>&nbsp;            playerType = &quot;Engineer Points&quot;;</b>
+<i>65</i>&nbsp;        }
+<b class="fc"><i>66</i>&nbsp;        if ((type == 1) &amp;&amp; (skillPoints &lt; 16) &amp;&amp; (skillPointsMap.get(playerType) &lt;= 15)) {</b>
+<b class="nc"><i>67</i>&nbsp;            skillPointsMap.put(playerType, skillPointsMap.get(playerType) + 1);</b>
+<b class="nc"><i>68</i>&nbsp;            skillPoints++;</b>
+<b class="fc"><i>69</i>&nbsp;        } else if ((type == -1) &amp;&amp; (skillPoints &gt; 0) &amp;&amp; (skillPointsMap.get(playerType) &gt;= 1)) {</b>
+<b class="nc"><i>70</i>&nbsp;            skillPointsMap.put(playerType, skillPointsMap.get(playerType) - 1);</b>
+<b class="nc"><i>71</i>&nbsp;            skillPoints--;</b>
+<i>72</i>&nbsp;        }
+<b class="fc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public int getPilotPoints() {
+<b class="fc"><i>76</i>&nbsp;        return skillPointsMap.get(&quot;Pilot Points&quot;);</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;    public int getFighterPoints() {
+<b class="fc"><i>79</i>&nbsp;        return skillPointsMap.get(&quot;Fighter Points&quot;);</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;    public int getTraderPoints() {
+<b class="fc"><i>82</i>&nbsp;        return skillPointsMap.get(&quot;Trader Points&quot;);</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;    public int getEngineerPoints() {
+<b class="fc"><i>85</i>&nbsp;        return skillPointsMap.get(&quot;Engineer Points&quot;);</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public int getSkillPoints() {
+<b class="nc"><i>90</i>&nbsp;        return skillPoints;</b>
+<i>91</i>&nbsp;    }
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    private HashMap&lt;String, Integer&gt; convertDefaultArraytoMap() {
+<b class="fc"><i>94</i>&nbsp;        HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>95</i>&nbsp;        String[] playerTypes = new String[] {&quot;Pilot Points&quot;, &quot;Fighter Points&quot;, &quot;Trader Points&quot;,</b>
+<i>96</i>&nbsp;                &quot;Engineer Points&quot;};
+<b class="fc"><i>97</i>&nbsp;        for (String playerType : playerTypes) {</b>
+<b class="fc"><i>98</i>&nbsp;            map.put(playerType, 4);</b>
+<i>99</i>&nbsp;        }
+<b class="fc"><i>100</i>&nbsp;        return map;</b>
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-04-16 12:31</div>
+</div>
+</body>
+</html>

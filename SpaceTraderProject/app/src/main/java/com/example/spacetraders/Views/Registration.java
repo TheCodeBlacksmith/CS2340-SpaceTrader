@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+@SuppressWarnings("ALL")
 public class Registration extends AppCompatActivity {
 
     private FirebaseUser mCurrentUser;

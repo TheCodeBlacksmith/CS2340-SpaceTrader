@@ -2,6 +2,7 @@ package com.example.spacetraders.Model;
 
 import com.example.spacetraders.Entity.TradeGood;
 
+@SuppressWarnings("ALL")
 public class MarketPlace {
 
     private final TradeGood[] itemsForSale = {
@@ -42,8 +43,7 @@ public class MarketPlace {
 
     public int getTotalQuantity() {
         int sum = 0;
-        for (int i = 0; i < itemsForSale.length; i++) {
-            TradeGood item = itemsForSale[i];
+        for (TradeGood item : itemsForSale) {
             if (item != null) {
                 sum += item.getQuantity();
             }
@@ -53,8 +53,7 @@ public class MarketPlace {
 
     public String toString() {
         String s = "";
-        for (int i = 0; i < itemsForSale.length; i++) {
-            TradeGood item = itemsForSale[i];
+        for (TradeGood item : itemsForSale) {
             if (item != null) {
                 s += item.getName() + " " + item.getFinalPrice() + " " + item.getQuantity() + "\n";
             }

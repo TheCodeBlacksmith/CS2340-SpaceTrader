@@ -1,5 +1,6 @@
 package com.example.spacetraders.Entity;
 
+@SuppressWarnings("ALL")
 public class Planet {
     public static final String[] SolarNames = {
             "Acamar",

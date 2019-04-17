@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress LongLine, AndroidElementNotAllowed, AndroidElementNotAllowed -->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".Views.MainActivity">
+    tools:context=".Views.MainActivity"
+    tools:ignore="Overdraw">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,11 +33,9 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/black">
 
+                <!--suppress AndroidElementNotAllowed -->
                 <TextView
-                    android:id="@+id/textViewPilot2"
                     android:layout_width="match_parent"
-
-
                     android:layout_height="39dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
@@ -47,7 +47,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/nameEditText"
@@ -63,7 +64,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="Deprecated,HardcodedText,TextFields"
+                    android:importantForAutofill="no"
+                    tools:targetApi="o" />
 
                 <Button
                     android:id="@+id/submitNameButton"
@@ -76,7 +80,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+                    tools:ignore="HardcodedText" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -87,23 +92,25 @@
             android:layout_height="5dp"
             android:layout_weight="2"
             android:background="@android:color/black"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="NestedWeights">
 
                 <TextView
-                    android:id="@+id/textViewPilot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Pilot"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/textSPPilot"
@@ -113,7 +120,8 @@
                     android:text="_"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <Button
                     android:id="@+id/buttonPlusPilot"
@@ -126,7 +134,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="+"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/buttonMinusPilot"
@@ -139,7 +148,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="-"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
@@ -150,14 +160,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewFighter3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Fighter"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/textSPFighter"
@@ -167,7 +177,8 @@
                     android:text="_"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <Button
                     android:id="@+id/buttonPlusFighter"
@@ -180,7 +191,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="+"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/buttonMinusFighter"
@@ -193,7 +205,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="-"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
             </LinearLayout>
 
         </LinearLayout>
@@ -203,13 +216,15 @@
             android:layout_height="4dp"
             android:layout_weight="3"
             android:background="@android:color/black"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="171dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="NestedWeights">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -218,7 +233,8 @@
                     android:text="Trader"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/textSPTrader"
@@ -228,7 +244,8 @@
                     android:text="_"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <Button
                     android:id="@+id/buttonPlusTrader"
@@ -241,7 +258,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="+"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/buttonMinusTrader"
@@ -254,7 +272,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="-"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <LinearLayout
@@ -270,7 +289,8 @@
                     android:text="Engineer"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/textSPEngineer"
@@ -280,7 +300,8 @@
                     android:text="_"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <Button
                     android:id="@+id/buttonPlusEngineer"
@@ -293,7 +314,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="+"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/buttonMinusEngineer"
@@ -306,7 +328,8 @@
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="changeSP"
                     android:text="-"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
             </LinearLayout>
         </LinearLayout>
 

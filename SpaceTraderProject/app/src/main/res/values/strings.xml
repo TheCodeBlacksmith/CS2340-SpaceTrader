@@ -1,33 +1,34 @@
-<resources>
+<!--suppress ALL, TodoComment -->
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SpaceTraders</string>
     <string name="title_activity_login">Sign in &amp; Register</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in" tools:ignore="UnusedResources">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_incorrect_password" tools:ignore="UnusedResources">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
+    <string name="permission_rationale" tools:ignore="UnusedResources">"Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="description">Description</string>
     <string name="solar_system_name">Solar System Name</string>
-    <string name="Location" />
+    <string name="Location" tools:ignore="UnusedResources" />
     <string name="location">Location:</string>
-    <string name="title_activity_planet_market_place">PlanetMarketPlace</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_planet_market_place" tools:ignore="UnusedResources">PlanetMarketPlace</string>
+    <string name="title_home" tools:ignore="UnusedResources">Home</string>
+    <string name="title_dashboard" tools:ignore="UnusedResources">Dashboard</string>
+    <string name="title_notifications" tools:ignore="UnusedResources">Notifications</string>
     <string name="title_activity_market_place_viewer">MarketPlaceViewer</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_text_1" tools:ignore="UnusedResources">Tab 1</string>
+    <string name="tab_text_2" tools:ignore="UnusedResources">Tab 2</string>
+    <string name="tab_text_3" tools:ignore="UnusedResources">Tab 3</string>
+    <string name="action_settings" tools:ignore="UnusedResources">Settings</string>
+    <string name="section_format" tools:ignore="UnusedResources">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" tools:ignore="UnusedResources">Hello blank fragment</string>
 </resources>

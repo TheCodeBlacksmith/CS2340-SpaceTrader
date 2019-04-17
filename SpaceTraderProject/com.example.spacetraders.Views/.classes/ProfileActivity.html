@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ProfileActivity</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.example.spacetraders.Views</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ProfileActivity (com.example.spacetraders.Views)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProfileActivity</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ProfileActivity$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.example.spacetraders.Views;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import android.annotation.SuppressLint;
+<i>4</i>&nbsp;import android.support.annotation.NonNull;
+<i>5</i>&nbsp;import android.support.v7.app.AppCompatActivity;
+<i>6</i>&nbsp;import android.os.Bundle;
+<i>7</i>&nbsp;import android.widget.TextView;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import com.example.spacetraders.Model.Player;
+<i>10</i>&nbsp;import com.example.spacetraders.R;
+<i>11</i>&nbsp;import com.google.firebase.auth.FirebaseAuth;
+<i>12</i>&nbsp;import com.google.firebase.auth.FirebaseUser;
+<i>13</i>&nbsp;import com.google.firebase.database.DataSnapshot;
+<i>14</i>&nbsp;import com.google.firebase.database.DatabaseError;
+<i>15</i>&nbsp;import com.google.firebase.database.DatabaseReference;
+<i>16</i>&nbsp;import com.google.firebase.database.FirebaseDatabase;
+<i>17</i>&nbsp;import com.google.firebase.database.ValueEventListener;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;@SuppressWarnings(&quot;ALL&quot;)
+<b class="nc"><i>20</i>&nbsp;public class ProfileActivity extends AppCompatActivity {</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    private FirebaseUser mCurrentUser;
+<i>24</i>&nbsp;    private String current_uID;
+<i>25</i>&nbsp;    private DatabaseReference mProfileDatabase;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    private TextView profileUserName;
+<i>28</i>&nbsp;    private TextView profileEmail;
+<i>29</i>&nbsp;    private TextView profileSkillPoints;
+<i>30</i>&nbsp;    private TextView profilePilotPoints;
+<i>31</i>&nbsp;    private TextView profileFigherPoints;
+<i>32</i>&nbsp;    private TextView profileTraderPoints;
+<i>33</i>&nbsp;    private TextView profileEngineerPoints;
+<i>34</i>&nbsp;    private TextView profileAvailableFuel;
+<i>35</i>&nbsp;    private TextView profileCurrentPlanet;
+<i>36</i>&nbsp;    private TextView profileCurrentLoc;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    protected void onCreate(Bundle savedInstanceState) {
+<b class="nc"><i>41</i>&nbsp;        super.onCreate(savedInstanceState);</b>
+<b class="nc"><i>42</i>&nbsp;        setContentView(R.layout.activity_profile);</b>
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;        profileUserName = findViewById(R.id.profileUserName);</b>
+<b class="nc"><i>45</i>&nbsp;        profileEmail = findViewById(R.id.profileEmail);</b>
+<b class="nc"><i>46</i>&nbsp;        profileSkillPoints = findViewById(R.id.profileskillPoints);</b>
+<b class="nc"><i>47</i>&nbsp;        profilePilotPoints = findViewById(R.id.profilePilotPoints);</b>
+<b class="nc"><i>48</i>&nbsp;        profileFigherPoints = findViewById(R.id.profileFighterPoints);</b>
+<b class="nc"><i>49</i>&nbsp;        profileTraderPoints = findViewById(R.id.profileTraderPoints);</b>
+<b class="nc"><i>50</i>&nbsp;        profileEngineerPoints = findViewById(R.id.profileEngineerPoints);</b>
+<b class="nc"><i>51</i>&nbsp;        profileAvailableFuel = findViewById(R.id.profileAvailableFuel);</b>
+<b class="nc"><i>52</i>&nbsp;        profileCurrentPlanet = findViewById(R.id.profileCurrentPlanet);</b>
+<b class="nc"><i>53</i>&nbsp;        profileCurrentLoc = findViewById(R.id.profileCurrentLocation);</b>
+<i>54</i>&nbsp;
+<b class="nc"><i>55</i>&nbsp;        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();</b>
+<i>56</i>&nbsp;//        if (FirebaseAuth.getInstance() ==  null) {
+<i>57</i>&nbsp;//            Toast.makeText(getApplicationContext(), &quot;NULL&quot;, Toast.LENGTH_LONG).show();
+<i>58</i>&nbsp;//        }
+<b class="nc"><i>59</i>&nbsp;        current_uID = mCurrentUser.getUid();</b>
+<b class="nc"><i>60</i>&nbsp;        mProfileDatabase = FirebaseDatabase.getInstance().getReference().child(&quot;users&quot;).child(current_uID);</b>
+<i>61</i>&nbsp;
+<b class="nc"><i>62</i>&nbsp;        ValueEventListener profileListener = new ValueEventListener() {</b>
+<i>63</i>&nbsp;            @SuppressLint(&quot;SetTextI18n&quot;)
+<i>64</i>&nbsp;            @Override
+<i>65</i>&nbsp;            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+<i>66</i>&nbsp;
+<b class="nc"><i>67</i>&nbsp;                Player player = dataSnapshot.getValue(Player.class);</b>
+<b class="nc"><i>68</i>&nbsp;                profileUserName.setText(profileUserName.getText().toString() + &quot; &quot; + player.getUserName());</b>
+<b class="nc"><i>69</i>&nbsp;                profileEmail.setText(profileEmail.getText().toString() + &quot; &quot; + player.getEmail());</b>
+<b class="nc"><i>70</i>&nbsp;                profileSkillPoints.setText(profileSkillPoints.getText().toString() + &quot; &quot; + player.getSkillPoints());</b>
+<b class="nc"><i>71</i>&nbsp;                profilePilotPoints.setText(profilePilotPoints.getText().toString() + &quot; &quot; + dataSnapshot.child(&quot;pilotPoints&quot;).getValue().toString());</b>
+<b class="nc"><i>72</i>&nbsp;                profileFigherPoints.setText(profileFigherPoints.getText().toString() + &quot; &quot; + dataSnapshot.child(&quot;fighterPoints&quot;).getValue().toString());</b>
+<b class="nc"><i>73</i>&nbsp;                profileTraderPoints.setText(profileTraderPoints.getText().toString() + &quot; &quot; + dataSnapshot.child(&quot;traderPoints&quot;).getValue().toString());</b>
+<b class="nc"><i>74</i>&nbsp;                profileEngineerPoints.setText(profileEngineerPoints.getText().toString() + &quot; &quot; + dataSnapshot.child(&quot;engineerPoints&quot;).getValue().toString());</b>
+<b class="nc"><i>75</i>&nbsp;                profileAvailableFuel.setText(&quot;Available Fuel: &quot; + dataSnapshot.child(&quot;shipFuel&quot;).getValue().toString());</b>
+<b class="nc"><i>76</i>&nbsp;                profileCurrentPlanet.setText(&quot;Current Planet: &quot; + dataSnapshot.child(&quot;currentPlanet&quot;).getValue().toString());</b>
+<b class="nc"><i>77</i>&nbsp;                profileCurrentLoc.setText(&quot;Current Location: &quot; + &quot;&lt;&quot; + dataSnapshot.child(&quot;currentXCoord&quot;).getValue().toString() + &quot;, &quot; + dataSnapshot.child(&quot;currentYCoord&quot;).getValue().toString() + &quot;&gt;&quot;);</b>
+<i>78</i>&nbsp;                //TODO: Default values if planet, and location hasnt been set yet
+<i>79</i>&nbsp;            }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;            @Override
+<i>82</i>&nbsp;            public void onCancelled(@NonNull DatabaseError databaseError) {
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;            }
+<i>85</i>&nbsp;        };
+<b class="nc"><i>86</i>&nbsp;        mProfileDatabase.addListenerForSingleValueEvent(profileListener);</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    @Override
+<i>92</i>&nbsp;    protected void onStart() {
+<b class="nc"><i>93</i>&nbsp;        super.onStart();</b>
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-04-16 12:31</div>
+</div>
+</body>
+</html>

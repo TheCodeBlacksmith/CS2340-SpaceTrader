@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/planet_space_universe_1.jpg" />
+        <ignore path="src/main/res/drawable/spiral_bkg.jpg" />
+    </issue>
+</lint>

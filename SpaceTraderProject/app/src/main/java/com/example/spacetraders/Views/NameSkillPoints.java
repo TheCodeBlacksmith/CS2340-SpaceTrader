@@ -1,5 +1,6 @@
 package com.example.spacetraders.Views;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,23 +22,17 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * A login screen that offers login via email/password.
+ */
 public class NameSkillPoints extends AppCompatActivity {
 
-    private FirebaseUser mCurrentUser;
     private String current_uID;
     private DatabaseReference mDatabase;
 
 
     private EditText name;
     private Button submitButton;
-    private Button plusButtonPilot;
-    private Button plusButtonFighter;
-    private Button plusButtonTrader;
-    private Button plusButtonEngineer;
-    private Button minusButtonPilot;
-    private Button minusButtonFighter;
-    private Button minusButtonTrader;
-    private Button minusButtonEngineer;
 
     private TextView pilotPoints;
     private TextView fighterPoints;
@@ -46,24 +41,32 @@ public class NameSkillPoints extends AppCompatActivity {
 
     private Player p1;
 
-    int spCounter = 16;
+    private final int spCounter = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skills);
 
-        name = (EditText) findViewById(R.id.nameEditText);
-        submitButton = (Button) findViewById(R.id.submitNameButton);
+        name = findViewById(R.id.nameEditText);
+        submitButton = findViewById(R.id.submitNameButton);
 
-        plusButtonPilot = findViewById(R.id.buttonPlusPilot);
-        plusButtonFighter = findViewById(R.id.buttonPlusFighter);
-        plusButtonTrader = findViewById(R.id.buttonPlusTrader);
-        plusButtonEngineer = findViewById(R.id.buttonPlusEngineer);
-        minusButtonPilot = findViewById(R.id.buttonMinusPilot);
-        minusButtonFighter = findViewById(R.id.buttonMinusFighter);
-        minusButtonTrader = findViewById(R.id.buttonMinusTrader);
-        minusButtonEngineer = findViewById(R.id.buttonMinusEngineer);
+        //noinspection unused
+        Button plusButtonPilot = findViewById(R.id.buttonPlusPilot);
+        //noinspection unused
+        Button plusButtonFighter = findViewById(R.id.buttonPlusFighter);
+        //noinspection unused
+        Button plusButtonTrader = findViewById(R.id.buttonPlusTrader);
+        //noinspection unused
+        Button plusButtonEngineer = findViewById(R.id.buttonPlusEngineer);
+        //noinspection unused
+        Button minusButtonPilot = findViewById(R.id.buttonMinusPilot);
+        //noinspection unused
+        Button minusButtonFighter = findViewById(R.id.buttonMinusFighter);
+        //noinspection unused
+        Button minusButtonTrader = findViewById(R.id.buttonMinusTrader);
+        //noinspection unused
+        Button minusButtonEngineer = findViewById(R.id.buttonMinusEngineer);
 
 
         pilotPoints = findViewById(R.id.textSPPilot);
@@ -71,7 +74,7 @@ public class NameSkillPoints extends AppCompatActivity {
         traderPoints = findViewById(R.id.textSPTrader);
         engineerPoints = findViewById(R.id.textSPEngineer);
 
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (FirebaseAuth.getInstance() ==  null) {
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
         }
@@ -94,12 +97,15 @@ public class NameSkillPoints extends AppCompatActivity {
             public void onClick(View v) {
                 if (!"".equals(name.getText().toString())) {
                     //Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_LONG).show();
-                    if (p1.getSkillPoints() != 16) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(NameSkillPoints.this).create();
+                    if (p1.getSkillPoints() != spCounter) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(NameSkillPoints.this)
+                                .create();
                         alertDialog.setTitle("Skill Point Allocation");
-                        alertDialog.setMessage("You need to allocate " + (16 - p1.getSkillPoints()) + " more points");
+                        alertDialog.setMessage("You need to allocate "
+                                + (spCounter - p1.getSkillPoints()) + " more points");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
+                                    @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                     }
@@ -120,20 +126,24 @@ public class NameSkillPoints extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Data Upated!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Data Upated!",
+                                Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(NameSkillPoints.this, Registration.class);
-                        Toast.makeText(getApplicationContext(), "moved on", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "moved on",
+                                Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Could not update data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Could not update data",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
+    @SuppressWarnings("JavaDoc")
     public void changeSP(View view) {
         if (view.getId() == R.id.buttonPlusPilot) {
             p1.changePoints(0, 1);
@@ -156,6 +166,7 @@ public class NameSkillPoints extends AppCompatActivity {
         updateSPFields();
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateSPFields() {
         pilotPoints.setText("Skill Points: " + String.valueOf(p1.getPilotPoints()));
         fighterPoints.setText("Skill Points: " + String.valueOf(p1.getFighterPoints()));

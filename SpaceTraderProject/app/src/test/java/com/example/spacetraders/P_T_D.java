@@ -1,5 +1,6 @@
 package com.example.spacetraders;
 
+@SuppressWarnings("ALL")
 public class P_T_D {
 
     int playerHealth = 10;

@@ -3,6 +3,7 @@ package com.example.spacetraders.Entity;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class TradeGood {
     private String name;
     private double basePrice;

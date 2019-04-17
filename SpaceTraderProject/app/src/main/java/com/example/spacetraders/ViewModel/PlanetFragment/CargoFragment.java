@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,15 +23,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 
+/**
+ * A login screen that offers login via email/password.
+ */
 public class CargoFragment extends Fragment {
 
 
-    private FirebaseUser mCurrentUser;
-    private String current_uID;
     private DatabaseReference mCargoDatabase;
 
     private RecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter mAdapter;
 
     @Override
@@ -43,16 +42,17 @@ public class CargoFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.cargo_list);
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (FirebaseAuth.getInstance() ==  null) {
             Toast.makeText(getContext(), "NULL USER", Toast.LENGTH_LONG).show();
         }
-        current_uID = mCurrentUser.getUid();
+        String current_uID = mCurrentUser.getUid();
 
-        mCargoDatabase = FirebaseDatabase.getInstance().getReference().child("cargo").child(current_uID);
+        mCargoDatabase = FirebaseDatabase.getInstance()
+                .getReference().child("cargo").child(current_uID);
         mCargoDatabase.keepSynced(true);
 
         return view;
@@ -77,20 +77,23 @@ public class CargoFragment extends Fragment {
 
     private void showCargo() {
         Query query = mCargoDatabase;
-        FirebaseRecyclerOptions<TradeGood> options = new FirebaseRecyclerOptions.Builder<TradeGood>()
+        FirebaseRecyclerOptions<TradeGood> options = new FirebaseRecyclerOptions
+                .Builder<TradeGood>()
                 .setQuery(query, TradeGood.class)
                 .build();
 
         mAdapter = new FirebaseRecyclerAdapter<TradeGood, CargoFragment.CargoGoodHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final CargoFragment.CargoGoodHolder holder, int position, @NonNull final TradeGood model) {
+            protected void onBindViewHolder(@NonNull final CargoFragment.CargoGoodHolder holder,
+                                            int position, @NonNull final TradeGood model) {
                 holder.setDetails(model);
 
             }
 
             @NonNull
             @Override
-            public CargoFragment.CargoGoodHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            public CargoFragment.CargoGoodHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,
+                                                                    int i) {
                 View view = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.cargo_item, viewGroup, false);
                 return new CargoGoodHolder(view);
@@ -113,6 +116,7 @@ public class CargoFragment extends Fragment {
 
         }
 
+        @SuppressWarnings("FeatureEnvy")
         @SuppressLint("SetTextI18n")
         void setDetails(TradeGood model) {
             //item_name.setText(model.getName());

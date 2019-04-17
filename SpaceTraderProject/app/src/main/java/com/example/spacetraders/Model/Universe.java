@@ -1,13 +1,9 @@
 package com.example.spacetraders.Model;
 
-import com.example.spacetraders.Entity.Planet;
-import com.example.spacetraders.Entity.Resource;
-import com.example.spacetraders.Entity.TechLevel;
-import com.google.firebase.database.Exclude;
-
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class Universe {
 
     private String planet;

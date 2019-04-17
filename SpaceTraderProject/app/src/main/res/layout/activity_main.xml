@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress LongLine -->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/spiral_bkg"
     android:fadingEdge="horizontal|vertical"
-    tools:context=".Views.MainActivity">
+    tools:context=".Views.MainActivity"
+    tools:ignore="Overdraw">
 
     <Button
         android:id="@+id/buttonUniverses"
@@ -24,7 +26,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.484" />
+        app:layout_constraintVertical_bias="0.484"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/buttonProfile"
@@ -36,7 +39,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.023"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/buttonSignOut"
@@ -50,7 +54,8 @@
         app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.14"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/buttonExitApp"
@@ -64,5 +69,6 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="0.025"
+        tools:ignore="HardcodedText" />
 </android.support.constraint.ConstraintLayout>

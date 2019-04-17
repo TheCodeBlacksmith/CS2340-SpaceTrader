@@ -11,7 +11,6 @@
     android:layout_marginTop="8dp">
 
     <LinearLayout
-        android:id="@+id/universe_item_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
@@ -25,7 +24,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,7 +40,8 @@
                     android:text="item_name"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/market_item_price"
@@ -48,7 +49,8 @@
                     android:layout_height="31dp"
                     android:layout_marginTop="4dp"
                     android:text="item_price"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/market_item_amount"
@@ -58,7 +60,8 @@
                     android:text="item_amount"
                     android:textAlignment="center"
                     android:textColor="#000000"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
@@ -75,7 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:background="@android:color/holo_green_light"
-                    android:text="BUY" />
+                    android:text="BUY"
+                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
 
                 <Button
                     android:id="@+id/market_sell_button"
@@ -83,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="@android:color/holo_orange_light"
-                    android:text="SELL" />
+                    android:text="SELL"
+                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
 
             </LinearLayout>
         </LinearLayout>
