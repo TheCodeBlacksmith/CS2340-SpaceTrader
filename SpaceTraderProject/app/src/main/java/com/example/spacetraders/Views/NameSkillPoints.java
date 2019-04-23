@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -78,7 +80,7 @@ public class NameSkillPoints extends AppCompatActivity {
         if (FirebaseAuth.getInstance() ==  null) {
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
         }
-        current_uID = mCurrentUser.getUid();
+        current_uID = Objects.requireNonNull(mCurrentUser).getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -96,7 +98,6 @@ public class NameSkillPoints extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!"".equals(name.getText().toString())) {
-                    //Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_LONG).show();
                     if (p1.getSkillPoints() != spCounter) {
                         AlertDialog alertDialog = new AlertDialog.Builder(NameSkillPoints.this)
                                 .create();
@@ -143,7 +144,10 @@ public class NameSkillPoints extends AppCompatActivity {
                 });
     }
 
-    @SuppressWarnings("JavaDoc")
+    /**
+     * A login screen that offers login via email/password.
+     * @pram view a view
+     */
     public void changeSP(View view) {
         if (view.getId() == R.id.buttonPlusPilot) {
             p1.changePoints(0, 1);

@@ -1,6 +1,7 @@
 package com.example.spacetraders.Views;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         buttonUniverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), UniverseSelectionActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PlanetSelectionActivity.class);
                 startActivity(intent);
             }
         });
@@ -118,28 +119,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        MediaPlayer ring = MediaPlayer.create(MainActivity.this, R.raw.beats);
+        ring.start();
+
     }
 
     public void changeSP(View view) {
     }
-
-    public void changeSP(View view) {
-    }
-
-    public void changeSP(View view) {
-    }
-
-    public void changeSP(View view) {
-    }
-
-    public void changeSP(View view) {
-    }
-
-    public void changeSP(View view) {
-    }
-
-    public void changeSP(View view) {
-    }
-
-    public void changeSP(View view) {
-    }}
+}

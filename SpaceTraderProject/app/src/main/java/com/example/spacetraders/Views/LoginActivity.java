@@ -35,7 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private TextView switchLoginStatus;
     private Button mEmailSignInButton;
-    private Boolean loginStatus = true;  // if true, means user wants to log in | false, user wants to register
+    private Boolean loginStatus = true;
+    // if true, means user wants to log in | false, user wants to register
 
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";

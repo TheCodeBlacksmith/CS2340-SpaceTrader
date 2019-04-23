@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Objects;
+
 
 /**
  * A login screen that offers login via email/password.
@@ -35,7 +37,7 @@ public class CargoFragment extends Fragment {
     private FirebaseRecyclerAdapter mAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cargo_fragment, container, false);
@@ -49,7 +51,7 @@ public class CargoFragment extends Fragment {
         if (FirebaseAuth.getInstance() ==  null) {
             Toast.makeText(getContext(), "NULL USER", Toast.LENGTH_LONG).show();
         }
-        String current_uID = mCurrentUser.getUid();
+        String current_uID = Objects.requireNonNull(mCurrentUser).getUid();
 
         mCargoDatabase = FirebaseDatabase.getInstance()
                 .getReference().child("cargo").child(current_uID);

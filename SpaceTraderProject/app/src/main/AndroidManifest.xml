@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <dist:module dist:instant="true" />
 
@@ -19,22 +19,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".Views.PlanetSelectionActivity"></activity>
         <activity
             android:name=".ViewModel.MarketPlaceViewer"
             android:label="@string/title_activity_market_place_viewer"
-            tools:ignore="InnerclassSeparator">
-        </activity>
-        <activity android:name=".ViewModel.UniverseSelectionActivity"
+            tools:ignore="InnerclassSeparator"></activity>
+        <activity
+            android:name=".ViewModel.UniverseSelectionActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Views.ProfileActivity"
+        <activity
+            android:name=".Views.ProfileActivity"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Views.Registration"
+        <activity
+            android:name=".Views.Registration"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".Views.LoginActivity"
             android:label="@string/title_activity_login"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Views.MainActivity"
+        <activity
+            android:name=".Views.MainActivity"
             tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.NameSkillPoints"
+        <activity
+            android:name=".Views.NameSkillPoints"
             tools:ignore="InnerclassSeparator" />
     </application>
 

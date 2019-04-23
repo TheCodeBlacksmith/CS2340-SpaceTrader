@@ -1,5 +1,9 @@
 package com.example.spacetraders;
 
+import com.example.spacetraders.Entity.TradeGood;
+import com.example.spacetraders.Model.MarketPlace;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,7 +13,6 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-@SuppressWarnings("ALL")
 
 /**
 This JUnit tests to make sure the marketplaces are constructed correctly
@@ -17,10 +20,13 @@ This JUnit tests to make sure the marketplaces are constructed correctly
 
 public class marketplaceJUnits {
 
+    private MarketPlace market;
+    private MarketPlace market2;
+
     @Before
     public void setUp() {
-        market = new Marketplace(7);
-        market2 = new Marketplace();
+        market = new MarketPlace(7);
+        market2 = new MarketPlace();
     }
 
     @Test
@@ -38,7 +44,7 @@ public class marketplaceJUnits {
             new TradeGood("Robots", 5000, 100, -150, 6)
         };
 
-        assertArrayEquals(expected, market.getItemsForSale);
+        assertArrayEquals(expected, market.getItemsForSale());
 
         TradeGood[] expected2 = {
             new TradeGood("Water", 30, 4, 3, 0),
@@ -53,6 +59,6 @@ public class marketplaceJUnits {
             null
         };
 
-        assertArrayEquals(expected2, market2.getItemsForSale);
+        assertArrayEquals(expected2, market2.getItemsForSale());
     }
 }
